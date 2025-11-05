@@ -14,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class PostDTO {
+    private Long id;
     private String title;
     private String authorName;
     private String excerpt;
