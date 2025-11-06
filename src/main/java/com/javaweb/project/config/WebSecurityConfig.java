@@ -32,10 +32,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/api/auth/**").permitAll()
+                //        .requestMatchers("/api/auth/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET,"/posts/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/posts/search").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/post/**").permitAll()
