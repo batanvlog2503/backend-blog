@@ -60,7 +60,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void updateBlogPost(Long id, UpdatePostRequest request) {
+    public void updateBlogPost(Integer id, UpdatePostRequest request) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("NOT FOUND"));
         post = postConverter.convertUpdatePostRequestToEntity(request, post);
@@ -75,23 +75,26 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deleteBlogPostById(Long id) {
+    public void deleteBlogPostById(Integer id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("NOT FOUND"));
         postRepository.deleteById(id);
     }
 
     @Override
-    public PostDTO findBlogById(Long id) {
+    public PostDTO findBlogById(Integer id) {
         Post p = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("NOT FOUND"));
         return postConverter.convertPostToPostDTO(p);
     }
 
     @Override
-    public PostDetailDTO getAPostDetail(Long id) {
-        Post post = postRepository.findById(id).get();
-        return postConverter.convertPostToPostDetailDTO(post); // Single Post
+    public PostDetailDTO getAPostDetail(Integer id) {
+        Post post = postRepository.findById(id)
+                // Thay NoSuchElementException bằng ResourceNotFoundException
+                .orElseThrow(() -> new RuntimeException("Post not found with ID: " + id));
+
+        return postConverter.convertPostToPostDetailDTO(post);
     }
 
     @Override

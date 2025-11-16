@@ -16,7 +16,7 @@ public class CommentController {
 
     // deu can dang nhap de xac thuc
     @PostMapping(value = "/post/{postId}/comment")
-    public ResponseEntity<Object> writeComment(@PathVariable("postId") Long postId,
+    public ResponseEntity<Object> writeComment(@PathVariable("postId") Integer postId,
                                                @RequestBody CommentRequestDTO commentRequestDTO) {
         commentService.addCommentToPost(postId, commentRequestDTO);
         return new ResponseEntity<>("COMMENT IS CREATED SUCCESSFULLY", HttpStatus.OK);
@@ -24,8 +24,8 @@ public class CommentController {
 
 
     @DeleteMapping(value = "/post/{postId}/comments/{id}")
-    public ResponseEntity<Object> deleteComment(@PathVariable("postId") Long postId,
-                                                @PathVariable("id") Long id) {
+    public ResponseEntity<Object> deleteComment(@PathVariable("postId") Integer postId,
+                                                @PathVariable("id") Integer id) {
         commentService.deleteComment(id);
         return new ResponseEntity<>("COMMENT IS DELETED SUCCESSFULLY", HttpStatus.OK);
     }

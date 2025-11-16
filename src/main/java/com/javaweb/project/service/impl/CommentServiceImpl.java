@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentConverter commentConverter;
 
     @Override
-    public void addCommentToPost(Long postId, CommentRequestDTO commentRequestDTO) {
+    public void addCommentToPost(Integer postId, CommentRequestDTO commentRequestDTO) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NoSuchElementException("POST DOES NOT EXIST"));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -47,7 +47,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteComment(Long id) {
+    public void deleteComment(Integer id) {
         commentRepository.deleteById(id);
     }
 

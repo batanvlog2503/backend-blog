@@ -17,7 +17,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;

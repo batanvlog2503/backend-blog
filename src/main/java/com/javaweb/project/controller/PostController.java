@@ -30,7 +30,7 @@ public class PostController {
 
     //
     @GetMapping(value = "/post/{id}")
-    public ResponseEntity<PostDTO> getBlogPostById(@PathVariable("id") Long id) {
+    public ResponseEntity<PostDTO> getBlogPostById(@PathVariable("id") Integer id) {
         PostDTO blog = postService.findBlogById(id);
         return new ResponseEntity<>(blog, org.springframework.http.HttpStatus.OK);
     }
@@ -50,19 +50,19 @@ public class PostController {
     }
 
     @PutMapping(value="/post/update/{id}")
-    public ResponseEntity<String> updateBlogPost(@PathVariable("id") Long id, @RequestBody UpdatePostRequest request) {
+    public ResponseEntity<String> updateBlogPost(@PathVariable("id") Integer id, @RequestBody UpdatePostRequest request) {
         postService.updateBlogPost(id, request);
         return new ResponseEntity<>("POST IS UPDATED SUCCESSFULLY", org.springframework.http.HttpStatus.OK);
     }
 
     @DeleteMapping(value="/post/delete/{id}")
-    public ResponseEntity<String> deleteBlogPost(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteBlogPost(@PathVariable("id") Integer id) {
         postService.deleteBlogPostById(id);
         return new ResponseEntity<>("POST IS DELETED SUCCESSFULLY", org.springframework.http.HttpStatus.OK);
     }
 
     @GetMapping(value= "/post/detail/{id}")
-    public ResponseEntity<PostDetailDTO> getASinglePostDetail(@PathVariable("id") Long id) {
+    public ResponseEntity<PostDetailDTO> getASinglePostDetail(@PathVariable("id") Integer id) {
         PostDetailDTO postDetailDTO = postService.getAPostDetail(id);
         return new ResponseEntity<>(postDetailDTO, HttpStatus.OK);
     }

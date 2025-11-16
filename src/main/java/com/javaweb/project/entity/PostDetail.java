@@ -12,21 +12,21 @@ public class PostDetail {
 
     @Id
     @Column(name = "post_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "post_introduction", columnDefinition = "TEXT")
     private String introduction;
 
-    @Column(name = "post_content", nullable = false)
+    @Column(name = "post_content", columnDefinition = "TEXT", nullable = false)
     private String contentDetail; // thanh Content Detail
 
-    @Column(name = "post_end_content", nullable = false)
+    @Column(name = "post_end_content", columnDefinition = "TEXT", nullable = false)
     private String endContent;
 
-    @Column(name = "post_img", nullable = false)
+    @Column(name = "post_img", columnDefinition = "TEXT" ,nullable = false)
     private String img;
 
-    @Column(name = "post_link", nullable = false)
+    @Column(name = "post_link",columnDefinition = "TEXT", nullable = false)
     private String link;
 
     @OneToOne
