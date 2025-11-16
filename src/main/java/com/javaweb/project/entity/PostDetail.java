@@ -18,7 +18,7 @@ public class PostDetail {
     private String introduction;
 
     @Column(name = "post_content", nullable = false)
-    private String content;
+    private String contentDetail; // thanh Content Detail
 
     @Column(name = "post_end_content", nullable = false)
     private String endContent;

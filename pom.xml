@@ -104,6 +104,12 @@
     <build>
         <plugins>
             <!-- Maven Compiler Plugin để build đúng JDK -->
+<!--            java -jar target/*.jar-->
+<!--             Plugin đóng gói Spring Boot thành 1 file jar -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -113,8 +119,12 @@
                     <target>${java.version}</target>
                     <release>${java.version}</release>
                 </configuration>
+
             </plugin>
         </plugins>
+
     </build>
+
+
 
 </project>

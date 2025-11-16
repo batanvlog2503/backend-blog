@@ -11,7 +11,7 @@ public class SlugUtils {
         slug = Normalizer.normalize(slug, Normalizer.Form.NFD);
         slug = slug.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 
-        slug = slug.replaceAll("[^a-z0-9\\s-+]", "");
+        slug = slug.replaceAll("[^a-z0-9\\s-]", "");
 
         slug = slug.trim().replaceAll("\\s+", "-");
 
@@ -20,10 +20,13 @@ public class SlugUtils {
         return slug;
     }
 
+  //  "Xin Chào Thế Giới!" → "xin-chao-the-gioi"
+
     // Hàm tạo slug duy nhất (thêm hậu tố ngẫu nhiên)
     public static String toUniqueSlug(String title) {
         String baseSlug = toSlug(title);
         String randomSuffix = UUID.randomUUID().toString().substring(0, 6);
         return baseSlug + "-" + randomSuffix;
     }
+   // random Ngẫu nhiên "Hello World" → "hello-world-a1b2c3"
 }

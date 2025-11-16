@@ -30,7 +30,7 @@ public class PostConverter {
 
         User author = post.getAuthorUser();
         postDetailDTO.setTitle(post.getTitle());
-        postDetailDTO.setAuthorName(author.getDisplayName());
+        postDetailDTO.setAuthorName(author.getDisplayName()); // trả về displayName né
         postDetailDTO.setContent(post.getContent());
         postDetailDTO.setExcerpt(post.getExcerpt());
         postDetailDTO.setSlug(post.getSlug());
@@ -64,7 +64,8 @@ public class PostConverter {
 
         PostDetail postDetail = post.getPostDetail();
         postDetail.setIntroduction(request.getIntroduction());
-        postDetail.setContent(request.getContentDetail());
+        postDetail.setContentDetail(request.getContentDetail());
+        // ban đầu là setContent
         postDetail.setEndContent(request.getEndContent());
         postDetail.setImg(request.getImg());
         postDetail.setLink(request.getLink());

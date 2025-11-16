@@ -64,7 +64,7 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("NOT FOUND"));
         post = postConverter.convertUpdatePostRequestToEntity(request, post);
-        post.setSlug(generateSlugPost(request.getTitle()));
+        post.setSlug(generateSlugPost(request.getTitle())); // lấy slug từ title
         if(request.getCategoryName() != null || !request.getCategoryName().trim().isEmpty()) {
             post.setCategory(categoryService.addCategoryToPost(request.getCategoryName()));
         }
@@ -91,7 +91,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDetailDTO getAPostDetail(Long id) {
         Post post = postRepository.findById(id).get();
-        return postConverter.convertPostToPostDetailDTO(post);
+        return postConverter.convertPostToPostDetailDTO(post); // Single Post
     }
 
     @Override
@@ -100,9 +100,9 @@ public class PostServiceImpl implements PostService {
         String username = authentication.getName();
         User author = userService.findByUsername(username);
         Post post = postConverter.convertCreatePostRequestToEntity(request);
-        post.setSlug(generateSlugPost(request.getTitle()));
-
-
+        post.setSlug(generateSlugPost(request.getTitle())); // lấy từ title
+      //  Người dùng dễ hiểu, dễ nhớ
+//URL chứa từ khóa giúp tăng thứ hạng tìm kiếm
         if(request.getCategoryName() != null || !request.getCategoryName().trim().isEmpty()) {
             post.setCategory(categoryService.addCategoryToPost(request.getCategoryName()));
         }
@@ -111,7 +111,6 @@ public class PostServiceImpl implements PostService {
         }
 //        post.setCategory(categoryService.addCategoryToPost(request.getCategoryName()));
 //        post.setTags(tagService.addTagToPost(request.getTagNameList()));
-
         post.setViewCount(1);
         post.setAuthorUser(author);
         postRepository.save(post);
