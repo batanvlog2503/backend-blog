@@ -17,7 +17,8 @@ public class CorsConfig {
         config.setAllowedOrigins(Arrays.asList(
                 "https://mysql-oop.vercel.app",
                 "http://localhost:5173",
-                "http://localhost:3000"
+                "http://localhost:3000",
+                "https://mysql-oop-git-main-batanvlog2503s-projects.vercel.app"
         ));
         config.setAllowedHeaders(Arrays.asList("*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));

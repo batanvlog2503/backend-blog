@@ -9,7 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://mysql-oop.vercel.app",
+        "https://mysql-oop-git-main-batanvlog2503s-projects.vercel.app"
+})
 public class CommentController {
     @Autowired
     private CommentService commentService;

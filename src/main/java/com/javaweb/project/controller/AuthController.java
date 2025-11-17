@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://mysql-oop.vercel.app",
+        "https://mysql-oop-git-main-batanvlog2503s-projects.vercel.app"
+})
 public class AuthController {
 
     @Autowired
