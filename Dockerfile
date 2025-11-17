@@ -1,4 +1,4 @@
-# Stage 1: Build
+# Build stage
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
@@ -10,19 +10,18 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn clean package -DskipTests -B
 
-# Stage 2: Run
+# Run stage
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Copy jar file từ build stage
+# Copy jar từ build stage
 COPY --from=build /app/target/*.jar app.jar
 
 # Expose port
 EXPOSE 8080
 
-# Run application với profile production
+# Run app
 ENTRYPOINT ["java", \
-    "-Dspring.profiles.active=prod", \
     "-XX:+UseContainerSupport", \
     "-XX:MaxRAMPercentage=75.0", \
     "-Djava.security.egd=file:/dev/./urandom", \
