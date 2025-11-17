@@ -62,10 +62,20 @@ public class PostController {
     }
 
     @GetMapping(value= "/post/detail/{id}")
-    public ResponseEntity<PostDetailDTO> getASinglePostDetail(@PathVariable("id") Integer id) {
-        PostDetailDTO postDetailDTO = postService.getAPostDetail(id);
-        return new ResponseEntity<>(postDetailDTO, HttpStatus.OK);
+    public ResponseEntity<?> getASinglePostDetail(@PathVariable("id") Integer id) {
+        try {
+            PostDetailDTO postDetailDTO = postService.getAPostDetail(id);
+            if (postDetailDTO == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+            }
+            return ResponseEntity.ok(postDetailDTO);
+        } catch (Exception e) {
+            e.printStackTrace(); // Log lỗi chi tiết
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error: " + e.getMessage());
+        }
     }
+
 
     @GetMapping(value = "/post/myblog")
     public ResponseEntity<Object> getMyBlog() {
