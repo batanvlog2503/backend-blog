@@ -40,7 +40,7 @@ public class User {
     @OneToMany(mappedBy = "authorUser", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
