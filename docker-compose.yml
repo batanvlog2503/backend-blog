@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:8.0  # Dùng 8.0, không phải 9.4
     container_name: blog-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root123
@@ -11,17 +11,18 @@ services:
       MYSQL_PASSWORD: blogpass
       TZ: Asia/Ho_Chi_Minh
     ports:
-      - "3307:3306"  # Dùng port 3307 để tránh conflict với MySQL local
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
       - blog-network
+    command: --default-authentication-plugin=mysql_native_password
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
-      interval: 10s
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "bloguser", "-pblogpass"]
+      interval: 5s
       timeout: 5s
-      retries: 10
-      start_period: 30s
+      retries: 20
+      start_period: 60s  # Đợi lâu hơn
 
   app:
     build: .
@@ -29,20 +30,22 @@ services:
     ports:
       - "8080:8080"
     environment:
-      # Kích hoạt profile Docker
+      # QUAN TRỌNG: Kích hoạt profile docker
       SPRING_PROFILES_ACTIVE: docker
-      # Override database config
+
+      # Connection string - Chú ý tên service là "mysql"
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/blog_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
       SPRING_DATASOURCE_USERNAME: bloguser
       SPRING_DATASOURCE_PASSWORD: blogpass
-      # JWT Secret
+
+      # JWT
       JWT_SECRET: a1b0e4fa6fcb50fdb5795445a529f60ad5085ddc153eeb2260a59e00492fe79b
     depends_on:
       mysql:
         condition: service_healthy
     networks:
       - blog-network
-    restart: on-failure
+    restart: on-failure:3
 
 volumes:
   mysql_data:
