@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -26,10 +28,10 @@ public class AuthController {
     private AuthenticationManager authManager;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest req) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
 
         authService.addAccount(req);
-        return ResponseEntity.ok("SUCCESSFULLY");
+        return ResponseEntity.ok(Map.of("message", "SUCCESSFULLY"));
     }
 
     @PostMapping("/login")
