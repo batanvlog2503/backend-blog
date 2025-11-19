@@ -18,15 +18,13 @@
         <relativePath/>
     </parent>
 
-    <!-- Cấu hình JDK -->
-    <properties>
-        <java.version>21</java.version>
-    </properties>
+    <!-- Cấu hình JDK - GỘP TẤT CẢ PROPERTIES VÀO ĐÂY -->
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
     <dependencies>
         <!-- Spring Web -->
         <dependency>
@@ -73,18 +71,14 @@
             <artifactId>modelmapper</artifactId>
             <version>3.1.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-<!--        jwt-->
+
+        <!-- jwt-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -98,19 +92,21 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- sử dụng Jackson để parse JSON -->
+            <artifactId>jjwt-jackson</artifactId>
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Plugin đóng gói Spring Boot thành 1 file jar -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -121,7 +117,8 @@
                     <release>${java.version}</release>
                 </configuration>
             </plugin>
-            <!-- Thêm plugin này -->
+
+            <!-- Maven Resources Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -131,6 +128,7 @@
                 </configuration>
             </plugin>
         </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -138,7 +136,5 @@
             </resource>
         </resources>
     </build>
-
-
 
 </project>
